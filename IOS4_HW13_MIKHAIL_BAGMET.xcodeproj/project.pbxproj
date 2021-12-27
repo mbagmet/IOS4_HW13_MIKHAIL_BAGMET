@@ -8,22 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		79763937277A3919006C6F55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79763936277A3919006C6F55 /* AppDelegate.swift */; };
-		79763939277A3919006C6F55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79763938277A3919006C6F55 /* SceneDelegate.swift */; };
 		7976393B277A3919006C6F55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976393A277A3919006C6F55 /* ViewController.swift */; };
 		7976393E277A3919006C6F55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7976393C277A3919006C6F55 /* Main.storyboard */; };
 		79763940277A391C006C6F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7976393F277A391C006C6F55 /* Assets.xcassets */; };
 		79763943277A391C006C6F55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79763941277A391C006C6F55 /* LaunchScreen.storyboard */; };
+		79763957277A7614006C6F55 /* MediaLibruaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79763956277A7614006C6F55 /* MediaLibruaryViewController.swift */; };
+		79763959277A79C3006C6F55 /* ForYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79763958277A79C3006C6F55 /* ForYouViewController.swift */; };
+		7976395B277A7A31006C6F55 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976395A277A7A31006C6F55 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		79763933277A3919006C6F55 /* IOS4_HW13_MIKHAIL_BAGMET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOS4_HW13_MIKHAIL_BAGMET.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79763936277A3919006C6F55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		79763938277A3919006C6F55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7976393A277A3919006C6F55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7976393D277A3919006C6F55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7976393F277A391C006C6F55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79763942277A391C006C6F55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79763944277A391C006C6F55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79763956277A7614006C6F55 /* MediaLibruaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLibruaryViewController.swift; sourceTree = "<group>"; };
+		79763958277A79C3006C6F55 /* ForYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewController.swift; sourceTree = "<group>"; };
+		7976395A277A7A31006C6F55 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +70,10 @@
 		7976394A277A6353006C6F55 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				7976394D277A63A8006C6F55 /* Controllers */,
+				7976394F277A7577006C6F55 /* MediaLibruary */,
+				79763951277A759C006C6F55 /* ForYou */,
+				79763955277A75D4006C6F55 /* Albums */,
+				79763953277A75AF006C6F55 /* Search */,
 				7976394B277A6361006C6F55 /* App */,
 			);
 			path = Sources;
@@ -75,7 +82,6 @@
 		7976394B277A6361006C6F55 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				79763938277A3919006C6F55 /* SceneDelegate.swift */,
 				79763936277A3919006C6F55 /* AppDelegate.swift */,
 			);
 			path = App;
@@ -105,6 +111,62 @@
 				79763941277A391C006C6F55 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7976394F277A7577006C6F55 /* MediaLibruary */ = {
+			isa = PBXGroup;
+			children = (
+				79763950277A758A006C6F55 /* Controllers */,
+			);
+			path = MediaLibruary;
+			sourceTree = "<group>";
+		};
+		79763950277A758A006C6F55 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				79763956277A7614006C6F55 /* MediaLibruaryViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		79763951277A759C006C6F55 /* ForYou */ = {
+			isa = PBXGroup;
+			children = (
+				79763952277A75A5006C6F55 /* Controllers */,
+			);
+			path = ForYou;
+			sourceTree = "<group>";
+		};
+		79763952277A75A5006C6F55 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				79763958277A79C3006C6F55 /* ForYouViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		79763953277A75AF006C6F55 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				79763954277A75B6006C6F55 /* Controllers */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		79763954277A75B6006C6F55 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7976395A277A7A31006C6F55 /* SearchViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		79763955277A75D4006C6F55 /* Albums */ = {
+			isa = PBXGroup;
+			children = (
+				7976394D277A63A8006C6F55 /* Controllers */,
+			);
+			path = Albums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,9 +239,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7976395B277A7A31006C6F55 /* SearchViewController.swift in Sources */,
+				79763959277A79C3006C6F55 /* ForYouViewController.swift in Sources */,
+				79763957277A7614006C6F55 /* MediaLibruaryViewController.swift in Sources */,
 				7976393B277A3919006C6F55 /* ViewController.swift in Sources */,
 				79763937277A3919006C6F55 /* AppDelegate.swift in Sources */,
-				79763939277A3919006C6F55 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
