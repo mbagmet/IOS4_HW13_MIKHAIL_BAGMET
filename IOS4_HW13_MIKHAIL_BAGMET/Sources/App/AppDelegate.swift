@@ -30,10 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                        tag: 1)
 
         // MARK: - "Albums" tab
-        let albumsViewController = UIViewController()
-        let albumsNavigationController = UINavigationController(rootViewController: albumsViewController)
-        albumsViewController.view.backgroundColor = .systemTeal
-        albumsViewController.tabBarItem = UITabBarItem(title: "Альбомы",
+        let albumsLayout = UICollectionViewLayout()
+        let albumsCollectionViewController = AlbumsCollectionViewController(collectionViewLayout: albumsLayout)
+        let albumsNavigationController = UINavigationController(rootViewController: albumsCollectionViewController)
+        albumsCollectionViewController.tabBarItem = UITabBarItem(title: AlbumsCollectionViewController.Strings.navigationTitle,
                                                        image: UIImage(systemName: "rectangle.stack.fill"),
                                                        tag: 2)
 
@@ -53,7 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ], animated: true)
 
         tabBarController.selectedIndex = 2
-        tabBarController.tabBar.barStyle = .black
 
         // MARK: - window settings
         window?.rootViewController = tabBarController
