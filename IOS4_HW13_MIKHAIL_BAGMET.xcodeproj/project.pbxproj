@@ -11,6 +11,7 @@
 		7955B349277BA37500000277 /* AlbumsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B348277BA37500000277 /* AlbumsSectionModel.swift */; };
 		7955B34B277BA3E500000277 /* AlbumsItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B34A277BA3E500000277 /* AlbumsItemModel.swift */; };
 		7955B350277BA7C400000277 /* Model.json in Resources */ = {isa = PBXBuildFile; fileRef = 7955B34F277BA7C400000277 /* Model.json */; };
+		796480892790B6F800C36E36 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796480882790B6F800C36E36 /* BundleExtension.swift */; };
 		79763937277A3919006C6F55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79763936277A3919006C6F55 /* AppDelegate.swift */; };
 		7976393B277A3919006C6F55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976393A277A3919006C6F55 /* ViewController.swift */; };
 		7976393E277A3919006C6F55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7976393C277A3919006C6F55 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		7955B348277BA37500000277 /* AlbumsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsSectionModel.swift; sourceTree = "<group>"; };
 		7955B34A277BA3E500000277 /* AlbumsItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsItemModel.swift; sourceTree = "<group>"; };
 		7955B34F277BA7C400000277 /* Model.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Model.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
+		796480882790B6F800C36E36 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		79763933277A3919006C6F55 /* IOS4_HW13_MIKHAIL_BAGMET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOS4_HW13_MIKHAIL_BAGMET.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79763936277A3919006C6F55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7976393A277A3919006C6F55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,14 @@
 				7955B34A277BA3E500000277 /* AlbumsItemModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		796480872790B6C000C36E36 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				796480882790B6F800C36E36 /* BundleExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7976392A277A3919006C6F55 = {
@@ -93,6 +103,7 @@
 				79763951277A759C006C6F55 /* ForYou */,
 				79763955277A75D4006C6F55 /* Albums */,
 				79763953277A75AF006C6F55 /* Search */,
+				796480872790B6C000C36E36 /* Extensions */,
 				7976394B277A6361006C6F55 /* App */,
 			);
 			path = Sources;
@@ -262,6 +273,7 @@
 			files = (
 				7976395B277A7A31006C6F55 /* SearchViewController.swift in Sources */,
 				79763959277A79C3006C6F55 /* ForYouViewController.swift in Sources */,
+				796480892790B6F800C36E36 /* BundleExtension.swift in Sources */,
 				7955B340277B324900000277 /* AlbumsCollectionViewController.swift in Sources */,
 				79763957277A7614006C6F55 /* MediaLibruaryViewController.swift in Sources */,
 				7955B34B277BA3E500000277 /* AlbumsItemModel.swift in Sources */,

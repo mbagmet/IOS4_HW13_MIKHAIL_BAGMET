@@ -11,6 +11,8 @@ private let reuseIdentifier = "Cell"
 
 class AlbumsCollectionViewController: UICollectionViewController {
 
+    let sections = Bundle.main.decode([AlbumsSectionModel].self, from: "Model.json")
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,6 +25,12 @@ class AlbumsCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
         setupView()
         setupNavigation()
+
+        sections.map { (section) in
+            section.items.map { (item) in
+                print(item.picturesQty)
+            }
+        }
     }
 
     /*

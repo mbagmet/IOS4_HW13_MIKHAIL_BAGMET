@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AlbumsItemModel {
+struct AlbumsItemModel: Decodable {
     let albumTitle: String
     let picturesQty: String
     let albumPicture: String?

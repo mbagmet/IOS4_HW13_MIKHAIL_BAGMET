@@ -7,15 +7,30 @@
 
 import Foundation
 
-enum AlbumsSectionType {
+enum AlbumsSectionType: Decodable {
     case myAlbums
     case commonAlbums
     case peopleAndPlaces
     case mediafilesTypes
     case another
+    case unknown(value: String)
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let status = try? container.decode(String.self)
+        switch status {
+              case "myAlbums": self = .myAlbums
+              case "commonAlbums": self = .commonAlbums
+              case "peopleAndPlaces": self = .peopleAndPlaces
+              case "mediafilesTypes": self = .mediafilesTypes
+              case "another": self = .another
+              default:
+                 self = .unknown(value: status ?? "unknown")
+          }
+    }
 }
 
-struct AlbumsSectionModel {
+struct AlbumsSectionModel: Decodable {
     let type: AlbumsSectionType
     let title: String
     let items: [AlbumsItemModel]

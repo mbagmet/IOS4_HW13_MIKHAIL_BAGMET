@@ -1,6 +1,6 @@
 [
     {
-        "type": ".myAlbums",
+        "type": "myAlbums",
         "title": "Мои Альбомы",
         "items": [
             {
@@ -55,7 +55,7 @@
         ]
     },
     {
-        "type": ".commonAlbums",
+        "type": "commonAlbums",
         "title": "Общие альбомы",
         "items": [
             {
@@ -85,7 +85,7 @@
         ]
     },
     {
-        "type": ".peopleAndPlaces",
+        "type": "peopleAndPlaces",
         "title": "Люди и места",
         "items": [
             {
@@ -101,7 +101,7 @@
         ]
     },
     {
-        "type": ".mediafilesTypes",
+        "type": "mediafilesTypes",
         "title": "Типы медиафайлов",
         "items": [
             {
@@ -157,7 +157,7 @@
         ]
     },
     {
-        "type": ".another",
+        "type": "another",
         "title": "Другое",
         "items": [
             {
