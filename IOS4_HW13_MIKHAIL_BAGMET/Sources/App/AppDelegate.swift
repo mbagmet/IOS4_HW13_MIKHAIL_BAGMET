@@ -30,10 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                        tag: 1)
 
         // MARK: - "Albums" tab
-        let albumsLayout = UICollectionViewLayout()
-        let albumsCollectionViewController = AlbumsCollectionViewController(collectionViewLayout: albumsLayout)
-        let albumsNavigationController = UINavigationController(rootViewController: albumsCollectionViewController)
-        albumsCollectionViewController.tabBarItem = UITabBarItem(title: AlbumsCollectionViewController.Strings.navigationTitle,
+        let albumsViewController = AlbumsViewController()
+        let albumsNavigationController = UINavigationController(rootViewController: albumsViewController)
+        albumsViewController.tabBarItem = UITabBarItem(title: AlbumsViewController.Strings.navigationTitle,
                                                        image: UIImage(systemName: "rectangle.stack.fill"),
                                                        tag: 2)
 

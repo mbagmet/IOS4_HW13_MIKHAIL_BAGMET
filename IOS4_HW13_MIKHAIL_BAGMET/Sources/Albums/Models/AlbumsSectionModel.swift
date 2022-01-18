@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AlbumsSectionType: Decodable {
+enum AlbumsSectionType: Decodable, Hashable {
     case myAlbums
     case commonAlbums
     case peopleAndPlaces
@@ -30,7 +30,7 @@ enum AlbumsSectionType: Decodable {
     }
 }
 
-struct AlbumsSectionModel: Decodable {
+struct AlbumsSectionModel: Decodable, Hashable {
     let type: AlbumsSectionType
     let title: String
     let items: [AlbumsItemModel]
