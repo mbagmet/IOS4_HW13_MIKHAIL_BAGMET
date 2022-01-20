@@ -51,6 +51,9 @@ class AlbumsViewController: UIViewController {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.identifier)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: PeopleCollectionViewCell.identifier)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
+
+        collectionView.register(AlbumsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: AlbumsSectionHeader.identifier)
     }
 
     // MARK: - Private functions
@@ -70,13 +73,9 @@ class AlbumsViewController: UIViewController {
             
             case .myAlbums:
                 return self.createAlbumsSection(direction: .vertical, itemHeight: Metrics.myAlbumsItemHeight, groupHeight: Metrics.myAlbumsGroupHeight)
-            case .commonAlbums:
+            case .commonAlbums, .peopleAndPlaces:
                 return self.createAlbumsSection(direction: .vertical, itemHeight: Metrics.itemHeight, groupHeight: Metrics.groupHeight)
-            case .peopleAndPlaces:
-                return self.createAlbumsSection(direction: .vertical, itemHeight: Metrics.itemHeight, groupHeight: Metrics.groupHeight)
-            case .mediafilesTypes:
-                return self.createListSection(layoutEnvironment: layoutEnvironment)
-            case .another:
+            case .mediafilesTypes, .another:
                 return self.createListSection(layoutEnvironment: layoutEnvironment)
             case .unknown:
                 fatalError("Unknown section type!")
@@ -90,7 +89,7 @@ class AlbumsViewController: UIViewController {
 
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Metrics.itemWidth), heightDimension: .fractionalHeight(itemHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets.init(top: 5, leading: 5, bottom: 5, trailing: 5)
+        item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 5, bottom: 20, trailing: 5)
 
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Metrics.groupWidth), heightDimension: .fractionalWidth(groupHeight))
 
@@ -101,17 +100,36 @@ class AlbumsViewController: UIViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
-        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 10, bottom: 0, trailing: 14)
+        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 10, bottom: 10, trailing: 14)
+
+        let header = createSectionHeader()
+        section.boundarySupplementaryItems = [header]
 
         return section
     }
 
     private func createListSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
-        let section = NSCollectionLayoutSection.list(using: .init(appearance: .insetGrouped), layoutEnvironment: layoutEnvironment)
+        let section = NSCollectionLayoutSection.list(using: .init(appearance: .plain), layoutEnvironment: layoutEnvironment)
+        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 20, bottom: 10, trailing: 0)
+
+        let header = createSectionHeader()
+        header.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 15, bottom: 0, trailing: 20)
+
+        section.boundarySupplementaryItems = [header]
+
         return section
     }
 
+    private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
+                                                                        elementKind: UICollectionView.elementKindSectionHeader,
+                                                                        alignment: .topLeading)
+        sectionHeader.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 6, bottom: 0, trailing: 6)
+
+        return sectionHeader
+    }
 }
 
 // MARK: - CollectionView DiffableDataSource
@@ -123,28 +141,55 @@ extension AlbumsViewController {
 
             switch self.sections[indexPath.section].type {
 
-            case .myAlbums:
+            case .myAlbums, .commonAlbums:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCollectionViewCell.identifier, for: indexPath)
                 cell.backgroundColor = .systemGreen
-                return cell
-            case .commonAlbums:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCollectionViewCell.identifier, for: indexPath)
-                cell.backgroundColor = .systemYellow
+                //self.createHeaderDataSource(cellType: AlbumsWithButtonSectionHeader.self, reuseIdentifier: AlbumsWithButtonSectionHeader.identifierOne)
+
                 return cell
             case .peopleAndPlaces:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PeopleCollectionViewCell.identifier, for: indexPath)
                 cell.backgroundColor = .systemTeal
+                //self.createHeaderDataSource(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
+
                 return cell
-            case .mediafilesTypes:
+            case .mediafilesTypes, .another:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath)
-                return cell
-            case .another:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath)
+                //self.createHeaderDataSource(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
+
                 return cell
             case .unknown:
                 fatalError("Unknown section type!")
             }
         })
+
+        self.createHeaderSupplementary(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
+    }
+
+    private func createHeaderSupplementary<T: AlbumsSectionHeader>(cellType: T.Type, reuseIdentifier: String) {
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                                      withReuseIdentifier: reuseIdentifier,
+                                                                                      for: indexPath) as? T
+            else { return nil }
+
+            guard let firstItem = self?.dataSource?.itemIdentifier(for: indexPath) else { return nil }
+            guard let section = self?.dataSource?.snapshot().sectionIdentifier(containingItem: firstItem) else { return nil }
+
+            if section.title.isEmpty {
+                return nil
+            } else {
+                switch self?.sections[indexPath.section].type {
+                case .myAlbums, .commonAlbums:
+                    sectionHeader.configureHeader(with: section, button: true)
+                default:
+                    sectionHeader.configureHeader(with: section, button: false)
+                }
+            }
+
+            return sectionHeader
+        }
     }
 
     private func reloadData() {
