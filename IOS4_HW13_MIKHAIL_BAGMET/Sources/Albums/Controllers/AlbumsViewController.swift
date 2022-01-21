@@ -49,7 +49,8 @@ class AlbumsViewController: UIViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.identifier)
-        collectionView.register(PeopleCollectionViewCell.self, forCellWithReuseIdentifier: PeopleCollectionViewCell.identifier)
+        collectionView.register(PeopleCollectionViewCell.self, forCellWithReuseIdentifier: PeopleCollectionViewCell.identifierPeopleCell)
+        collectionView.register(PlacesCollectionViewCell.self, forCellWithReuseIdentifier: PlacesCollectionViewCell.identifierPlacesCell)
         collectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
 
         collectionView.register(AlbumsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -150,10 +151,17 @@ extension AlbumsViewController {
                 return cell
 
             case .peopleAndPlaces:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PeopleCollectionViewCell.identifier, for: indexPath)
-                    as? PeopleCollectionViewCell
-                cell?.backgroundColor = .systemTeal
-                return cell
+                if self.sections[indexPath.section].items[indexPath.item].peoplePhotos != nil {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PeopleCollectionViewCell.identifierPeopleCell, for: indexPath)
+                        as? PeopleCollectionViewCell
+                    cell?.configureCell(with: item)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlacesCollectionViewCell.identifierPlacesCell, for: indexPath)
+                        as? PlacesCollectionViewCell
+                    cell?.configureCell(with: item)
+                    return cell
+                }
 
             case .mediafilesTypes, .another:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath)
