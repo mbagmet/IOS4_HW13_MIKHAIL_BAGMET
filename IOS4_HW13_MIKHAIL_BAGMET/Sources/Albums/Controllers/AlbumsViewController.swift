@@ -48,9 +48,9 @@ class AlbumsViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.identifier)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: PeopleCollectionViewCell.identifier)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
+        collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.identifier)
+        collectionView.register(PeopleCollectionViewCell.self, forCellWithReuseIdentifier: PeopleCollectionViewCell.identifier)
+        collectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
 
         collectionView.register(AlbumsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: AlbumsSectionHeader.identifier)
@@ -100,7 +100,7 @@ class AlbumsViewController: UIViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
-        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 10, bottom: 10, trailing: 14)
+        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 10, bottom: 5, trailing: 14)
 
         let header = createSectionHeader()
         section.boundarySupplementaryItems = [header]
@@ -137,27 +137,29 @@ class AlbumsViewController: UIViewController {
 extension AlbumsViewController {
     private func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<AlbumsSectionModel, AlbumsItemModel>(collectionView: collectionView, cellProvider: {
-            collectionView, indexPath, item in
+            (collectionView, indexPath, item) -> UICollectionViewCell? in
+
+            let item = self.sections[indexPath.section].items[indexPath.item]
 
             switch self.sections[indexPath.section].type {
 
             case .myAlbums, .commonAlbums:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCollectionViewCell.identifier, for: indexPath)
-                cell.backgroundColor = .systemGreen
-                //self.createHeaderDataSource(cellType: AlbumsWithButtonSectionHeader.self, reuseIdentifier: AlbumsWithButtonSectionHeader.identifierOne)
-
+                    as? AlbumCollectionViewCell
+                cell?.configureCell(with: item)
                 return cell
+
             case .peopleAndPlaces:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PeopleCollectionViewCell.identifier, for: indexPath)
-                cell.backgroundColor = .systemTeal
-                //self.createHeaderDataSource(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
-
+                    as? PeopleCollectionViewCell
+                cell?.backgroundColor = .systemTeal
                 return cell
+
             case .mediafilesTypes, .another:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath)
-                //self.createHeaderDataSource(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
-
+                    as? ListCollectionViewCell
                 return cell
+                
             case .unknown:
                 fatalError("Unknown section type!")
             }
@@ -222,7 +224,7 @@ extension AlbumsViewController {
         static let myAlbumsItemHeight: CGFloat = 0.5
 
         static let groupWidth: CGFloat = 0.47
-        static let groupHeight: CGFloat = 0.55
+        static let groupHeight: CGFloat = 0.6
         static let myAlbumsGroupHeight: CGFloat = groupHeight * 2
     }
 }
