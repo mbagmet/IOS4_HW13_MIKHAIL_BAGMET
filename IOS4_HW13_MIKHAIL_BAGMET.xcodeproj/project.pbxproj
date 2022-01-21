@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		794CD465279B21B900DA135B /* PlacesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794CD464279B21B900DA135B /* PlacesCollectionViewCell.swift */; };
 		7955B340277B324900000277 /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B33F277B324900000277 /* AlbumsViewController.swift */; };
 		7955B349277BA37500000277 /* AlbumsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B348277BA37500000277 /* AlbumsSectionModel.swift */; };
 		7955B34B277BA3E500000277 /* AlbumsItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B34A277BA3E500000277 /* AlbumsItemModel.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		794CD464279B21B900DA135B /* PlacesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCollectionViewCell.swift; sourceTree = "<group>"; };
 		7955B33F277B324900000277 /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		7955B348277BA37500000277 /* AlbumsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsSectionModel.swift; sourceTree = "<group>"; };
 		7955B34A277BA3E500000277 /* AlbumsItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsItemModel.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			children = (
 				7987CDFF279817C700CA255F /* AlbumCollectionViewCell.swift */,
 				7987CE012798181400CA255F /* PeopleCollectionViewCell.swift */,
+				794CD464279B21B900DA135B /* PlacesCollectionViewCell.swift */,
 				7987CE032798184E00CA255F /* ListCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
@@ -305,6 +308,7 @@
 				7955B340277B324900000277 /* AlbumsViewController.swift in Sources */,
 				79763957277A7614006C6F55 /* MediaLibruaryViewController.swift in Sources */,
 				7955B34B277BA3E500000277 /* AlbumsItemModel.swift in Sources */,
+				794CD465279B21B900DA135B /* PlacesCollectionViewCell.swift in Sources */,
 				7987CE042798184E00CA255F /* ListCollectionViewCell.swift in Sources */,
 				7987CE00279817C700CA255F /* AlbumCollectionViewCell.swift in Sources */,
 				7987CE092798211C00CA255F /* AlbumsSectionHeader.swift in Sources */,
