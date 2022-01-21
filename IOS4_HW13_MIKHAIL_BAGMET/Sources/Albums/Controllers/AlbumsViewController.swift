@@ -154,7 +154,7 @@ extension AlbumsViewController {
                 if self.sections[indexPath.section].items[indexPath.item].peoplePhotos != nil {
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PeopleCollectionViewCell.identifierPeopleCell, for: indexPath)
                         as? PeopleCollectionViewCell
-                    cell?.backgroundColor = .systemTeal
+                    cell?.configureCell(with: item)
                     return cell
                 } else {
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlacesCollectionViewCell.identifierPlacesCell, for: indexPath)

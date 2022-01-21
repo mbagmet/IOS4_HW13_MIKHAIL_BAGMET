@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		791A52A5279B3DBC00BCCB14 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A52A4279B3DBC00BCCB14 /* UIViewExtension.swift */; };
 		794CD465279B21B900DA135B /* PlacesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794CD464279B21B900DA135B /* PlacesCollectionViewCell.swift */; };
 		7955B340277B324900000277 /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B33F277B324900000277 /* AlbumsViewController.swift */; };
 		7955B349277BA37500000277 /* AlbumsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B348277BA37500000277 /* AlbumsSectionModel.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		791A52A4279B3DBC00BCCB14 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		794CD464279B21B900DA135B /* PlacesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCollectionViewCell.swift; sourceTree = "<group>"; };
 		7955B33F277B324900000277 /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		7955B348277BA37500000277 /* AlbumsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsSectionModel.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				796480882790B6F800C36E36 /* BundleExtension.swift */,
+				791A52A4279B3DBC00BCCB14 /* UIViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				791A52A5279B3DBC00BCCB14 /* UIViewExtension.swift in Sources */,
 				7976395B277A7A31006C6F55 /* SearchViewController.swift in Sources */,
 				79763959277A79C3006C6F55 /* ForYouViewController.swift in Sources */,
 				796480892790B6F800C36E36 /* BundleExtension.swift in Sources */,

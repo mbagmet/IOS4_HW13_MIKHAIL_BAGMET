@@ -10,7 +10,7 @@ import UIKit
 class AlbumCollectionViewCell: UICollectionViewCell {
     static let identifier = "AlbumCollectionViewCell"
 
-    private lazy var albumImage: UIImageView = {
+    lazy var albumImage: UIImageView = {
         let albumImage = UIImageView()
         albumImage.contentMode = .scaleAspectFill
         albumImage.tintColor = .systemGray3
@@ -43,7 +43,7 @@ class AlbumCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
 
-    private lazy var imageStackView: UIStackView = {
+    lazy var imageStackView: UIStackView = {
         let stackView = UIStackView()
 
         stackView.axis = .vertical
@@ -72,7 +72,7 @@ class AlbumCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Settings
 
-    private func setupHierarchy() {
+    func setupHierarchy() {
         addSubview(parentStackView)
 
         parentStackView.addArrangedSubview(imageStackView)
@@ -82,19 +82,13 @@ class AlbumCollectionViewCell: UICollectionViewCell {
         imageStackView.addArrangedSubview(albumImage)
     }
 
-    private func setupLayout() {
+    func setupLayout() {
 
-        parentStackView.translatesAutoresizingMaskIntoConstraints = false
-        parentStackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        parentStackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        parentStackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        parentStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        parentStackView.addConstraints(top: self.topAnchor, paddingTop: 0, left: self.leadingAnchor, paddingLeft: 0,
+                                       right: self.trailingAnchor, paddingRight: 0, bottom: self.bottomAnchor, paddingBottom: 0)
 
         imageStackView.translatesAutoresizingMaskIntoConstraints = false
         imageStackView.heightAnchor.constraint(equalTo: parentStackView.widthAnchor, multiplier: 1.0).isActive = true
-
-        albumImage.translatesAutoresizingMaskIntoConstraints = false
-        albumImage.heightAnchor.constraint(equalTo: imageStackView.widthAnchor, multiplier: 1.0).isActive = true
     }
 
     // MARK: - Private func
@@ -111,7 +105,7 @@ class AlbumCollectionViewCell: UICollectionViewCell {
         if let albumPicture = model.albumPicture {
             albumImage.image = UIImage(named: albumPicture)
             albumImage.contentMode = .scaleAspectFill
-        } else {
+        } else if model.peoplePhotos == nil {
             setNoImageIcon()
         }
 
