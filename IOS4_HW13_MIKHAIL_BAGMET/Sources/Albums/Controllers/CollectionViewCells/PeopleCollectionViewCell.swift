@@ -7,6 +7,6 @@
 
 import UIKit
 
-class PeopleCollectionViewCell: UICollectionViewCell {
-    static let identifier = "PeopleCollectionViewCell"
+class PeopleCollectionViewCell: AlbumCollectionViewCell {
+    static let identifierPeopleCell = "PeopleCollectionViewCell"
 }
