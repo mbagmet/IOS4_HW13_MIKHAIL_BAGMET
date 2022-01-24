@@ -22,7 +22,6 @@ class AlbumsViewController: UIViewController {
 
         setupHierarchy()
         setupView()
-//        setupLayout()
         setupNavigation()
 
         setupCollectionView()
@@ -36,10 +35,6 @@ class AlbumsViewController: UIViewController {
         view.addSubview(collectionView)
     }
 
-    private func setupLayout() {
-
-    }
-
     private func setupView() {
         view.backgroundColor = .systemBackground
     }
@@ -51,13 +46,12 @@ class AlbumsViewController: UIViewController {
         collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.identifier)
         collectionView.register(PeopleCollectionViewCell.self, forCellWithReuseIdentifier: PeopleCollectionViewCell.identifierPeopleCell)
         collectionView.register(PlacesCollectionViewCell.self, forCellWithReuseIdentifier: PlacesCollectionViewCell.identifierPlacesCell)
-        collectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
 
         collectionView.register(AlbumsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: AlbumsSectionHeader.identifier)
     }
 
-    // MARK: - Private functions
+    // MARK: - Navigation
 
     private func setupNavigation() {
         navigationItem.title = Strings.navigationTitle
@@ -112,7 +106,7 @@ class AlbumsViewController: UIViewController {
     private func createListSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
         let section = NSCollectionLayoutSection.list(using: .init(appearance: .plain), layoutEnvironment: layoutEnvironment)
-        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 20, bottom: 10, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 30, trailing: 0)
 
         let header = createSectionHeader()
         header.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 15, bottom: 0, trailing: 20)
@@ -164,8 +158,7 @@ extension AlbumsViewController {
                 }
 
             case .mediafilesTypes, .another:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath)
-                    as? ListCollectionViewCell
+                let cell = collectionView.dequeueConfiguredReusableCell(using: self.createListCollectionViewCell(), for: indexPath, item: item)
                 return cell
                 
             case .unknown:
