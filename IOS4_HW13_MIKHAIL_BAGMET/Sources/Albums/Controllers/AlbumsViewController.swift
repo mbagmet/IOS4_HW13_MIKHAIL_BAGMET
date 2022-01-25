@@ -56,6 +56,9 @@ class AlbumsViewController: UIViewController {
     private func setupNavigation() {
         navigationItem.title = Strings.navigationTitle
         self.navigationController?.navigationBar.prefersLargeTitles = true
+
+        let navItem = UIBarButtonItem(image: UIImage(systemName: "plus"), menu: createMenu())
+        navigationItem.leftBarButtonItem = navItem
     }
 
     // MARK: - Compositional Layout
