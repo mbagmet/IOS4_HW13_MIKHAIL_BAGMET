@@ -70,9 +70,15 @@ class AlbumsViewController: UIViewController {
             switch section.type {
             
             case .myAlbums:
-                return self.createAlbumsSection(direction: .vertical, itemHeight: Metrics.myAlbumsItemHeight, groupHeight: Metrics.myAlbumsGroupHeight)
+                return self.createAlbumsSection(direction: .vertical,
+                                                itemHeight: Metrics.myAlbumsItemHeight,
+                                                itemsInColumn: Metrics.muAlbumsItemsInColumn,
+                                                environment: layoutEnvironment)
             case .commonAlbums, .peopleAndPlaces:
-                return self.createAlbumsSection(direction: .vertical, itemHeight: Metrics.itemHeight, groupHeight: Metrics.groupHeight)
+                return self.createAlbumsSection(direction: .vertical,
+                                                itemHeight: Metrics.itemHeight,
+                                                itemsInColumn: Metrics.itemsInColumn,
+                                                environment: layoutEnvironment)
             case .mediafilesTypes, .another:
                 return self.createListSection(layoutEnvironment: layoutEnvironment)
             case .unknown:
@@ -83,13 +89,17 @@ class AlbumsViewController: UIViewController {
         return layout
     }
 
-    private func createAlbumsSection(direction: GroupDirection, itemHeight: CGFloat, groupHeight: CGFloat) -> NSCollectionLayoutSection {
+    private func createAlbumsSection(direction: GroupDirection, itemHeight: CGFloat, itemsInColumn: CGFloat, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Metrics.itemWidth), heightDimension: .fractionalHeight(itemHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 5, bottom: 20, trailing: 5)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Metrics.groupWidth), heightDimension: .fractionalWidth(groupHeight))
+        let itemsInRowCount = environment.container.effectiveContentSize.width / Metrics.estimatedItemWidth
+
+        let groupWidth: CGFloat = 1 / (itemsInRowCount.rounded()) - Metrics.distanceBetweenItems
+        let groupHeight: CGFloat = groupWidth * Metrics.heightWidthMultiplier * itemsInColumn
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(groupWidth), heightDimension: .fractionalWidth(groupHeight))
 
         var group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         if direction == .horizontal {
@@ -124,6 +134,7 @@ class AlbumsViewController: UIViewController {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,
                                                                         alignment: .topLeading)
+
         sectionHeader.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 6, bottom: 0, trailing: 6)
 
         return sectionHeader
@@ -223,12 +234,16 @@ extension AlbumsViewController {
     }
 
     enum Metrics {
+        static let estimatedItemWidth: CGFloat = 230
+        static let itemsInColumn: CGFloat = 1
+        static let muAlbumsItemsInColumn: CGFloat = 2
+
         static let itemWidth: CGFloat = 1.0
         static let itemHeight: CGFloat = 1.0
         static let myAlbumsItemHeight: CGFloat = 0.5
 
-        static let groupWidth: CGFloat = 0.47
-        static let groupHeight: CGFloat = 0.6
-        static let myAlbumsGroupHeight: CGFloat = groupHeight * 2
+        static let heightWidthMultiplier: CGFloat = 1.28
+
+        static let distanceBetweenItems: CGFloat = 0.03
     }
 }
