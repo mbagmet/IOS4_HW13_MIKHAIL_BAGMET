@@ -70,9 +70,9 @@ class AlbumsViewController: UIViewController {
             switch section.type {
             
             case .myAlbums:
-                return self.createAlbumsSection(direction: .vertical, itemHeight: Metrics.myAlbumsItemHeight, groupHeight: Metrics.myAlbumsGroupHeight)
+                return self.createAlbumsSection(direction: .vertical, itemHeight: Metrics.myAlbumsItemHeight, groupHeight: Metrics.myAlbumsGroupHeight, environment: layoutEnvironment)
             case .commonAlbums, .peopleAndPlaces:
-                return self.createAlbumsSection(direction: .vertical, itemHeight: Metrics.itemHeight, groupHeight: Metrics.groupHeight)
+                return self.createAlbumsSection(direction: .vertical, itemHeight: Metrics.itemHeight, groupHeight: Metrics.groupHeight, environment: layoutEnvironment)
             case .mediafilesTypes, .another:
                 return self.createListSection(layoutEnvironment: layoutEnvironment)
             case .unknown:
@@ -83,9 +83,14 @@ class AlbumsViewController: UIViewController {
         return layout
     }
 
-    private func createAlbumsSection(direction: GroupDirection, itemHeight: CGFloat, groupHeight: CGFloat) -> NSCollectionLayoutSection {
+    private func createAlbumsSection(direction: GroupDirection, itemHeight: CGFloat, groupHeight: CGFloat, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Metrics.itemWidth), heightDimension: .fractionalHeight(itemHeight))
+        let desiredWidth: CGFloat = 300
+        let itemCount = environment.container.effectiveContentSize.width / desiredWidth
+        let fractionWidth: CGFloat = 1 / (itemCount.rounded())
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionWidth), heightDimension: .fractionalHeight(itemHeight))
+
+        //let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Metrics.itemWidth), heightDimension: .fractionalHeight(itemHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 5, bottom: 20, trailing: 5)
 
