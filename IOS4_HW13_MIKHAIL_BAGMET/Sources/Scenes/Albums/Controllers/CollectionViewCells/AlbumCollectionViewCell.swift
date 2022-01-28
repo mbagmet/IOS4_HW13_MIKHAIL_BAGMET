@@ -20,7 +20,7 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     private lazy var albumTitle: UILabel = {
         let title = UILabel()
         title.textColor = .label
-        title.font = .systemFont(ofSize: 16, weight: .regular)
+        title.font = .systemFont(ofSize: Metric.albumTitleFontSize, weight: .regular)
 
         return title
     }()
@@ -28,7 +28,7 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     private lazy var photosQty: UILabel = {
         let title = UILabel()
         title.textColor = .systemGray
-        title.font = .systemFont(ofSize: 15, weight: .regular)
+        title.font = .systemFont(ofSize: Metric.photosQtyFontSize, weight: .regular)
 
         return title
     }()
@@ -52,7 +52,7 @@ class AlbumCollectionViewCell: UICollectionViewCell {
 
         stackView.backgroundColor = .systemGray6
         stackView.layer.masksToBounds = true
-        stackView.layer.cornerRadius = 5
+        stackView.layer.cornerRadius = Metric.imageCornerRadius
 
         return stackView
     }()
@@ -84,17 +84,19 @@ class AlbumCollectionViewCell: UICollectionViewCell {
 
     func setupLayout() {
 
-        parentStackView.addConstraints(top: self.topAnchor, paddingTop: 0, left: self.leadingAnchor, paddingLeft: 0,
-                                       right: self.trailingAnchor, paddingRight: 0, bottom: self.bottomAnchor, paddingBottom: 0)
+        parentStackView.addConstraints(top: self.topAnchor, paddingTop: Metric.parentStackViewPaddings,
+                                       left: self.leadingAnchor, paddingLeft: Metric.parentStackViewPaddings,
+                                       right: self.trailingAnchor, paddingRight: Metric.parentStackViewPaddings,
+                                       bottom: self.bottomAnchor, paddingBottom: Metric.parentStackViewPaddings)
 
         imageStackView.translatesAutoresizingMaskIntoConstraints = false
-        imageStackView.heightAnchor.constraint(equalTo: parentStackView.widthAnchor, multiplier: 1.0).isActive = true
+        imageStackView.heightAnchor.constraint(equalTo: parentStackView.widthAnchor, multiplier: Metric.imageRatio).isActive = true
     }
 
     // MARK: - Private func
 
     private func setNoImageIcon() {
-        let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 60, weight: .thin))
+        let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: Metric.noImageIconSize, weight: .thin))
         albumImage.image = UIImage(systemName: "rectangle.on.rectangle", withConfiguration: config)
         albumImage.contentMode = .center
     }
@@ -111,5 +113,19 @@ class AlbumCollectionViewCell: UICollectionViewCell {
 
         albumTitle.text = model.albumTitle
         photosQty.text = model.picturesQty
+    }
+}
+
+// MARK: - Constants
+
+extension AlbumCollectionViewCell {
+    enum Metric {
+        static let albumTitleFontSize: CGFloat = 16
+        static let photosQtyFontSize: CGFloat = 15
+        static let noImageIconSize: CGFloat = 60
+
+        static let imageCornerRadius: CGFloat = 5
+        static let imageRatio: CGFloat = 1.0
+        static let parentStackViewPaddings: CGFloat = 0
     }
 }
