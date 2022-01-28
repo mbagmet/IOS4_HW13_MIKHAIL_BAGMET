@@ -43,10 +43,6 @@ class AlbumsViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.identifier)
-        collectionView.register(PeopleCollectionViewCell.self, forCellWithReuseIdentifier: PeopleCollectionViewCell.identifierPeopleCell)
-        collectionView.register(PlacesCollectionViewCell.self, forCellWithReuseIdentifier: PlacesCollectionViewCell.identifierPlacesCell)
-
         collectionView.register(AlbumsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: AlbumsSectionHeader.identifier)
     }
@@ -145,6 +141,23 @@ class AlbumsViewController: UIViewController {
 
 extension AlbumsViewController {
     private func createDataSource() {
+
+        let albumCellRegistration = UICollectionView.CellRegistration<AlbumCollectionViewCell, AlbumsItemModel> { (cell, indexPath, item) in
+            cell.configureCell(with: item)
+        }
+
+        let peopleCellRegistration = UICollectionView.CellRegistration<PeopleCollectionViewCell, AlbumsItemModel> { (cell, indexPath, item) in
+            cell.configureCell(with: item)
+        }
+
+        let placesCellRegistration = UICollectionView.CellRegistration<PlacesCollectionViewCell, AlbumsItemModel> { (cell, indexPath, item) in
+            cell.configureCell(with: item)
+        }
+
+        let listCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AlbumsItemModel> { (cell, indexPath, item) in
+            self.configureListCell(with: item, cell: cell)
+        }
+
         dataSource = UICollectionViewDiffableDataSource<AlbumsSectionModel, AlbumsItemModel>(collectionView: collectionView, cellProvider: {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
 
@@ -153,27 +166,17 @@ extension AlbumsViewController {
             switch self.sections[indexPath.section].type {
 
             case .myAlbums, .commonAlbums:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCollectionViewCell.identifier, for: indexPath)
-                    as? AlbumCollectionViewCell
-                cell?.configureCell(with: item)
-                return cell
+                return collectionView.dequeueConfiguredReusableCell(using: albumCellRegistration, for: indexPath, item: item)
 
             case .peopleAndPlaces:
                 if self.sections[indexPath.section].items[indexPath.item].peoplePhotos != nil {
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PeopleCollectionViewCell.identifierPeopleCell, for: indexPath)
-                        as? PeopleCollectionViewCell
-                    cell?.configureCell(with: item)
-                    return cell
+                    return collectionView.dequeueConfiguredReusableCell(using: peopleCellRegistration, for: indexPath, item: item)
                 } else {
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlacesCollectionViewCell.identifierPlacesCell, for: indexPath)
-                        as? PlacesCollectionViewCell
-                    cell?.configureCell(with: item)
-                    return cell
+                    return collectionView.dequeueConfiguredReusableCell(using: placesCellRegistration, for: indexPath, item: item)
                 }
 
             case .mediafilesTypes, .another:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: self.createListCollectionViewCell(), for: indexPath, item: item)
-                return cell
+                return collectionView.dequeueConfiguredReusableCell(using: listCellRegistration, for: indexPath, item: item)
                 
             case .unknown:
                 fatalError("Unknown section type!")
