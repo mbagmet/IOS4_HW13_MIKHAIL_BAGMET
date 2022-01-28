@@ -1,0 +1,181 @@
+[
+    {
+        "type": "myAlbums",
+        "title": "Мои Альбомы",
+        "items": [
+            {
+                "albumTitle": "Недавние",
+                "picturesQty": "10 724",
+                "albumPicture": "01"
+            },
+            {
+                "albumTitle": "Море",
+                "picturesQty": "863",
+                "albumPicture": "02"
+            },
+            {
+                "albumTitle": "Зима",
+                "picturesQty": "725",
+                "albumPicture": "03"
+            },
+            {
+                "albumTitle": "Природа",
+                "picturesQty": "83",
+                "albumPicture": "04"
+            },
+            {
+                "albumTitle": "Избранное",
+                "picturesQty": "543",
+                "albumPicture": "car"
+            },
+            {
+                "albumTitle": "Instagram",
+                "picturesQty": "863",
+                "albumPicture": "05"
+            },
+            {
+                "albumTitle": "Апрель 2021",
+                "picturesQty": "75",
+                "albumPicture": "06"
+            },
+            {
+                "albumTitle": "Скриншоты",
+                "picturesQty": "12",
+                "albumPicture": "screenshot"
+            },
+            {
+                "albumTitle": "Пустой",
+                "picturesQty": "0",
+            },
+            {
+                "albumTitle": "Фото",
+                "picturesQty": "12",
+                "albumPicture": "07"
+            }
+        ]
+    },
+    {
+        "type": "commonAlbums",
+        "title": "Общие альбомы",
+        "items": [
+            {
+                "albumTitle": "Провожаем лето",
+                "picturesQty": "От Вас",
+                "albumPicture": "08",
+                "whoPost": "РА"
+            },
+            {
+                "albumTitle": "Море",
+                "picturesQty": "От Вас",
+                "albumPicture": "09",
+                "whoPost": "АБ"
+            },
+            {
+                "albumTitle": "Человек",
+                "picturesQty": "От Вас",
+                "albumPicture": "man1",
+                "whoPost": "МА"
+            },
+            {
+                "albumTitle": "Снова человек",
+                "picturesQty": "От Вас",
+                "albumPicture": "man2",
+                "whoPost": "РА"
+            }
+        ]
+    },
+    {
+        "type": "peopleAndPlaces",
+        "title": "Люди и места",
+        "items": [
+            {
+                "albumTitle": "Люди",
+                "picturesQty": "4",
+                "peoplePhotos": ["man1", "man2", "man3", "man4"]
+            },
+            {
+                "albumTitle": "Места",
+                "picturesQty": "9 624",
+                "albumPicture": "map"
+            }
+        ]
+    },
+    {
+        "type": "mediafilesTypes",
+        "title": "Типы медиафайлов",
+        "items": [
+            {
+                "albumTitle": "Видео",
+                "picturesQty": "1 077",
+                "albumIcon": "video"
+            },
+            {
+                "albumTitle": "Селфи",
+                "picturesQty": "328",
+                "albumIcon": "person.crop.square"
+            },
+            {
+                "albumTitle": "Фото Live Photos",
+                "picturesQty": "1",
+                "albumIcon": "livephoto"
+            },
+            {
+                "albumTitle": "Портреты",
+                "picturesQty": "1 161",
+                "albumIcon": "cube"
+            },
+            {
+                "albumTitle": "Панорамы",
+                "picturesQty": "10",
+                "albumIcon": "pano"
+            },
+            {
+                "albumTitle": "Таймлапс",
+                "picturesQty": "221",
+                "albumIcon": "timelapse"
+            },
+            {
+                "albumTitle": "Замедленно",
+                "picturesQty": "43",
+                "albumIcon": "slowmo"
+            },
+            {
+                "albumTitle": "Серии",
+                "picturesQty": "4",
+                "albumIcon": "square.stack.3d.down.right"
+            },
+            {
+                "albumTitle": "Снимки экрана",
+                "picturesQty": "435",
+                "albumIcon": "camera.viewfinder"
+            },
+            {
+                "albumTitle": "Записи экрана",
+                "picturesQty": "15",
+                "albumIcon": "record.circle"
+            }
+        ]
+    },
+    {
+        "type": "another",
+        "title": "Другое",
+        "items": [
+            {
+                "albumTitle": "Импортированные",
+                "picturesQty": "6 897",
+                "albumIcon": "square.and.arrow.down"
+            },
+            {
+                "albumTitle": "Скрытые",
+                "picturesQty": "0",
+                "albumIcon": "eye.slash"
+            },
+            {
+                "albumTitle": "Недавно удаленные",
+                "picturesQty": "10",
+                "albumIcon": "trash"
+            }
+        ]
+    }
+]
+
