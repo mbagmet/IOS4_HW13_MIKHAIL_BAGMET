@@ -185,7 +185,8 @@ extension AlbumsViewController {
 
     private func createHeaderSupplementary() /*<T: AlbumsSectionHeader>(cellType: T.Type, reuseIdentifier: String)*/ {
 
-        let headerSuplementaryRegistration = UICollectionView.SupplementaryRegistration<AlbumsSectionHeader>(elementKind: UICollectionView.elementKindSectionHeader) { sectionHeaderView, elementKind, indexPath in
+        let headerSuplementaryRegistration = UICollectionView.SupplementaryRegistration<AlbumsSectionHeader>(
+            elementKind: UICollectionView.elementKindSectionHeader) { sectionHeaderView, elementKind, indexPath in
 
             guard let firstItem = self.dataSource?.itemIdentifier(for: indexPath) else { return }
             guard let section = self.dataSource?.snapshot().sectionIdentifier(containingItem: firstItem) else { return }
