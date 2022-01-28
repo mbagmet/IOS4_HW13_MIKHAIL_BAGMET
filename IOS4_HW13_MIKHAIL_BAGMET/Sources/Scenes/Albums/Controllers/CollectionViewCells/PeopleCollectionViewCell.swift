@@ -65,13 +65,13 @@ class PeopleCollectionViewCell: AlbumCollectionViewCell {
     override func setupLayout() {
         super.setupLayout()
 
-        firstHorizontalStackView.addConstraints(left: imageStackView.leadingAnchor, paddingLeft: 0,
-                                                right: imageStackView.trailingAnchor, paddingRight: 0)
-        firstHorizontalStackView.heightAnchor.constraint(equalTo: imageStackView.widthAnchor, multiplier: 0.49).isActive = true
+        firstHorizontalStackView.addConstraints(left: imageStackView.leadingAnchor, paddingLeft: Metric.rowHorizontalPaddings,
+                                                right: imageStackView.trailingAnchor, paddingRight: Metric.rowHorizontalPaddings)
+        firstHorizontalStackView.heightAnchor.constraint(equalTo: imageStackView.widthAnchor, multiplier: Metric.rowRatio).isActive = true
 
-        secondHorizontalStackView.addConstraints(left: imageStackView.leadingAnchor, paddingLeft: 0,
-                                                right: imageStackView.trailingAnchor, paddingRight: 0)
-        secondHorizontalStackView.heightAnchor.constraint(equalTo: imageStackView.widthAnchor, multiplier: 0.49).isActive = true
+        secondHorizontalStackView.addConstraints(left: imageStackView.leadingAnchor, paddingLeft: Metric.rowHorizontalPaddings,
+                                                right: imageStackView.trailingAnchor, paddingRight: Metric.rowHorizontalPaddings)
+        secondHorizontalStackView.heightAnchor.constraint(equalTo: imageStackView.widthAnchor, multiplier: Metric.rowRatio).isActive = true
 
         setImagesSizes(images: [firstHumanImage, secondHumanImage], equalTo: firstHorizontalStackView)
         setImagesSizes(images: [thirdHumanImage, fourthHumanImage], equalTo: secondHorizontalStackView)
@@ -135,5 +135,12 @@ class PeopleCollectionViewCell: AlbumCollectionViewCell {
         super.configureCell(with: model)
 
         fillImages(with: model, images: [firstHumanImage, secondHumanImage, thirdHumanImage, fourthHumanImage])
+    }
+}
+
+extension PeopleCollectionViewCell {
+    enum Metric {
+        static let rowRatio: CGFloat = 0.49
+        static let rowHorizontalPaddings: CGFloat = 0
     }
 }

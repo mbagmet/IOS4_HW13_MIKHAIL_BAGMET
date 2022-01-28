@@ -14,16 +14,16 @@ class AlbumsSectionHeader: UICollectionReusableView {
     private lazy var sectionTitle: UILabel = {
         let title = UILabel()
         title.textColor = .label
-        title.font = .systemFont(ofSize: 21, weight: .bold)
+        title.font = .systemFont(ofSize: Metric.sectionTitleSize, weight: .bold)
 
         return title
     }()
 
     private lazy var toAllButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Все", for: .normal)
+        button.setTitle(Strings.buttonText, for: .normal)
         button.setTitleColor(.link, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
+        button.titleLabel?.font = .systemFont(ofSize: Metric.buttonTextSize, weight: .regular)
 
         return button
     }()
@@ -39,7 +39,7 @@ class AlbumsSectionHeader: UICollectionReusableView {
     }()
 
     private lazy var separator: UIView = {
-        let line = UIView(frame: CGRect(x: 0, y: 0, width: 1100, height: 1.0))
+        let line = UIView(frame: CGRect(x: 0, y: 0, width: Metric.separatorWidth, height: Metric.separatorHeiht))
         line.backgroundColor = .systemGray5
 
         return line
@@ -85,5 +85,18 @@ class AlbumsSectionHeader: UICollectionReusableView {
         } else {
             toAllButton.isHidden = false
         }
+    }
+}
+
+extension AlbumsSectionHeader {
+    enum Metric {
+        static let sectionTitleSize: CGFloat = 21
+        static let buttonTextSize: CGFloat = 16
+        static let separatorWidth: CGFloat = 1100
+        static let separatorHeiht: CGFloat = 1.0
+    }
+
+    enum Strings {
+        static let buttonText: String = "Все"
     }
 }

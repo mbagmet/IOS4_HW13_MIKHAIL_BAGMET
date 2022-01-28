@@ -15,11 +15,11 @@ extension AlbumsViewController {
         configuration.prefersSideBySideTextAndSecondaryText = true
 
         configuration.text = model.albumTitle
-        configuration.textProperties.font = .systemFont(ofSize: 19, weight: .regular)
+        configuration.textProperties.font = .systemFont(ofSize: Metrics.albumTitleFontSize, weight: .regular)
         configuration.textProperties.color = .link
 
         configuration.secondaryText = model.picturesQty
-        configuration.secondaryTextProperties.font = .systemFont(ofSize: 15, weight: .regular)
+        configuration.secondaryTextProperties.font = .systemFont(ofSize: Metrics.photosQtyFontSize, weight: .regular)
         configuration.secondaryTextProperties.color = .systemGray
 
         guard let itemIcon = model.albumIcon else { return }
