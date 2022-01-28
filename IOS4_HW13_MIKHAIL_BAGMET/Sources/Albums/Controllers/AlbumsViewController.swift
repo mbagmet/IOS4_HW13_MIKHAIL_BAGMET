@@ -42,9 +42,6 @@ class AlbumsViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.backgroundColor = .systemBackground
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-        collectionView.register(AlbumsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: AlbumsSectionHeader.identifier)
     }
 
     // MARK: - Navigation
@@ -183,32 +180,30 @@ extension AlbumsViewController {
             }
         })
 
-        self.createHeaderSupplementary(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
+        self.createHeaderSupplementary() //(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
     }
 
-    private func createHeaderSupplementary<T: AlbumsSectionHeader>(cellType: T.Type, reuseIdentifier: String) {
-        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+    private func createHeaderSupplementary() /*<T: AlbumsSectionHeader>(cellType: T.Type, reuseIdentifier: String)*/ {
 
-            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                                      withReuseIdentifier: reuseIdentifier,
-                                                                                      for: indexPath) as? T
-            else { return nil }
+        let headerSuplementaryRegistration = UICollectionView.SupplementaryRegistration<AlbumsSectionHeader>(elementKind: UICollectionView.elementKindSectionHeader) { sectionHeaderView, elementKind, indexPath in
 
-            guard let firstItem = self?.dataSource?.itemIdentifier(for: indexPath) else { return nil }
-            guard let section = self?.dataSource?.snapshot().sectionIdentifier(containingItem: firstItem) else { return nil }
+            guard let firstItem = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+            guard let section = self.dataSource?.snapshot().sectionIdentifier(containingItem: firstItem) else { return }
 
             if section.title.isEmpty {
-                return nil
+                return
             } else {
-                switch self?.sections[indexPath.section].type {
+                switch self.sections[indexPath.section].type {
                 case .myAlbums, .commonAlbums:
-                    sectionHeader.configureHeader(with: section, button: true)
+                    sectionHeaderView.configureHeader(with: section, button: true)
                 default:
-                    sectionHeader.configureHeader(with: section, button: false)
+                    sectionHeaderView.configureHeader(with: section, button: false)
                 }
             }
+        }
 
-            return sectionHeader
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            return self?.collectionView.dequeueConfiguredReusableSupplementary(using: headerSuplementaryRegistration, for: indexPath)
         }
     }
 
