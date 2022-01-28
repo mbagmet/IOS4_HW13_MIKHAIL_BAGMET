@@ -103,9 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				7965E85C27A09EB5008F9AE9 /* AlbumsViewControllerNavBarMenu+Ext.swift */,
-				791C07B227A448D700D31F13 /* AlbumsViewControllerConstants+Ext.swift */,
 				791C07B427A4493200D31F13 /* AlbumsViewControllerDataSource+Ext.swift */,
 				791C07B627A44A8800D31F13 /* AlbumsViewConntrollerCompositionalLayout+Ext.swift */,
+				791C07B227A448D700D31F13 /* AlbumsViewControllerConstants+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

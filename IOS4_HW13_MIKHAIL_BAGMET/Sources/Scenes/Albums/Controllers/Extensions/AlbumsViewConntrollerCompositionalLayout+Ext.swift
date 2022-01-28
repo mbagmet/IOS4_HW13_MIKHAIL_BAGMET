@@ -40,7 +40,8 @@ extension AlbumsViewController {
 
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Metrics.itemWidth), heightDimension: .fractionalHeight(itemHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 5, bottom: 20, trailing: 5)
+        item.contentInsets = NSDirectionalEdgeInsets.init(top: Metrics.itemTopPadding, leading: Metrics.itemLeadingPadding,
+                                                          bottom: Metrics.itemBottomPadding, trailing: Metrics.itemTrailingPadding)
 
         let itemsInRowCount = environment.container.effectiveContentSize.width / Metrics.estimatedItemWidth
 
@@ -55,7 +56,8 @@ extension AlbumsViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
-        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 10, bottom: 5, trailing: 14)
+        section.contentInsets = NSDirectionalEdgeInsets.init(top: Metrics.sectionTopPadding, leading: Metrics.sectionLeadingPadding,
+                                                             bottom: Metrics.sectionBottomPadding, trailing: Metrics.sectionTrailingPadding)
 
         let header = createSectionHeader()
         section.boundarySupplementaryItems = [header]
@@ -66,10 +68,12 @@ extension AlbumsViewController {
     private func createListSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
         let section = NSCollectionLayoutSection.list(using: .init(appearance: .plain), layoutEnvironment: layoutEnvironment)
-        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 30, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets.init(top: Metrics.listSectionTopPadding, leading: Metrics.listSectionLeadingPadding,
+                                                             bottom: Metrics.listSectionBottomPadding, trailing: Metrics.listSectionTrailingPadding)
 
         let header = createSectionHeader()
-        header.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 15, bottom: 0, trailing: 20)
+        header.contentInsets = NSDirectionalEdgeInsets.init(top: Metrics.listHeaderTopPadding, leading: Metrics.listHeaderLeadingPadding,
+                                                            bottom: Metrics.listHeaderBottomPadding, trailing: Metrics.listHeaderTrailingPadding)
 
         section.boundarySupplementaryItems = [header]
 
@@ -77,12 +81,13 @@ extension AlbumsViewController {
     }
 
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(Metrics.sectionHeaderHeight))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,
                                                                         alignment: .topLeading)
 
-        sectionHeader.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 6, bottom: 0, trailing: 6)
+        sectionHeader.contentInsets = NSDirectionalEdgeInsets.init(top: Metrics.headerTopPadding, leading: Metrics.headerLeadingPadding,
+                                                                   bottom: Metrics.headerBottomPadding, trailing: Metrics.headerTrailingPadding)
 
         return sectionHeader
     }
