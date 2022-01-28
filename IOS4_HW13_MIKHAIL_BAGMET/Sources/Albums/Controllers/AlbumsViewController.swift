@@ -42,13 +42,6 @@ class AlbumsViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.backgroundColor = .systemBackground
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-        collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.identifier)
-        collectionView.register(PeopleCollectionViewCell.self, forCellWithReuseIdentifier: PeopleCollectionViewCell.identifierPeopleCell)
-        collectionView.register(PlacesCollectionViewCell.self, forCellWithReuseIdentifier: PlacesCollectionViewCell.identifierPlacesCell)
-
-        collectionView.register(AlbumsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: AlbumsSectionHeader.identifier)
     }
 
     // MARK: - Navigation
@@ -145,6 +138,23 @@ class AlbumsViewController: UIViewController {
 
 extension AlbumsViewController {
     private func createDataSource() {
+
+        let albumCellRegistration = UICollectionView.CellRegistration<AlbumCollectionViewCell, AlbumsItemModel> { (cell, indexPath, item) in
+            cell.configureCell(with: item)
+        }
+
+        let peopleCellRegistration = UICollectionView.CellRegistration<PeopleCollectionViewCell, AlbumsItemModel> { (cell, indexPath, item) in
+            cell.configureCell(with: item)
+        }
+
+        let placesCellRegistration = UICollectionView.CellRegistration<PlacesCollectionViewCell, AlbumsItemModel> { (cell, indexPath, item) in
+            cell.configureCell(with: item)
+        }
+
+        let listCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AlbumsItemModel> { (cell, indexPath, item) in
+            self.configureListCell(with: item, cell: cell)
+        }
+
         dataSource = UICollectionViewDiffableDataSource<AlbumsSectionModel, AlbumsItemModel>(collectionView: collectionView, cellProvider: {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
 
@@ -153,59 +163,48 @@ extension AlbumsViewController {
             switch self.sections[indexPath.section].type {
 
             case .myAlbums, .commonAlbums:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCollectionViewCell.identifier, for: indexPath)
-                    as? AlbumCollectionViewCell
-                cell?.configureCell(with: item)
-                return cell
+                return collectionView.dequeueConfiguredReusableCell(using: albumCellRegistration, for: indexPath, item: item)
 
             case .peopleAndPlaces:
                 if self.sections[indexPath.section].items[indexPath.item].peoplePhotos != nil {
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PeopleCollectionViewCell.identifierPeopleCell, for: indexPath)
-                        as? PeopleCollectionViewCell
-                    cell?.configureCell(with: item)
-                    return cell
+                    return collectionView.dequeueConfiguredReusableCell(using: peopleCellRegistration, for: indexPath, item: item)
                 } else {
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlacesCollectionViewCell.identifierPlacesCell, for: indexPath)
-                        as? PlacesCollectionViewCell
-                    cell?.configureCell(with: item)
-                    return cell
+                    return collectionView.dequeueConfiguredReusableCell(using: placesCellRegistration, for: indexPath, item: item)
                 }
 
             case .mediafilesTypes, .another:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: self.createListCollectionViewCell(), for: indexPath, item: item)
-                return cell
+                return collectionView.dequeueConfiguredReusableCell(using: listCellRegistration, for: indexPath, item: item)
                 
             case .unknown:
                 fatalError("Unknown section type!")
             }
         })
 
-        self.createHeaderSupplementary(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
+        self.createHeaderSupplementary() //(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
     }
 
-    private func createHeaderSupplementary<T: AlbumsSectionHeader>(cellType: T.Type, reuseIdentifier: String) {
-        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+    private func createHeaderSupplementary() /*<T: AlbumsSectionHeader>(cellType: T.Type, reuseIdentifier: String)*/ {
 
-            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                                      withReuseIdentifier: reuseIdentifier,
-                                                                                      for: indexPath) as? T
-            else { return nil }
+        let headerSuplementaryRegistration = UICollectionView.SupplementaryRegistration<AlbumsSectionHeader>(
+            elementKind: UICollectionView.elementKindSectionHeader) { sectionHeaderView, elementKind, indexPath in
 
-            guard let firstItem = self?.dataSource?.itemIdentifier(for: indexPath) else { return nil }
-            guard let section = self?.dataSource?.snapshot().sectionIdentifier(containingItem: firstItem) else { return nil }
+            guard let firstItem = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+            guard let section = self.dataSource?.snapshot().sectionIdentifier(containingItem: firstItem) else { return }
 
             if section.title.isEmpty {
-                return nil
+                return
             } else {
-                switch self?.sections[indexPath.section].type {
+                switch self.sections[indexPath.section].type {
                 case .myAlbums, .commonAlbums:
-                    sectionHeader.configureHeader(with: section, button: true)
+                    sectionHeaderView.configureHeader(with: section, button: true)
                 default:
-                    sectionHeader.configureHeader(with: section, button: false)
+                    sectionHeaderView.configureHeader(with: section, button: false)
                 }
             }
+        }
 
-            return sectionHeader
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            return self?.collectionView.dequeueConfiguredReusableSupplementary(using: headerSuplementaryRegistration, for: indexPath)
         }
     }
 
