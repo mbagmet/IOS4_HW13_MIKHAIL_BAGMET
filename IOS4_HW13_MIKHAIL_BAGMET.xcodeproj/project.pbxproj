@@ -19,7 +19,6 @@
 		796480892790B6F800C36E36 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796480882790B6F800C36E36 /* BundleExtension.swift */; };
 		7965E85D27A09EB5008F9AE9 /* AlbumsViewControllerNavBarMenu+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7965E85C27A09EB5008F9AE9 /* AlbumsViewControllerNavBarMenu+Ext.swift */; };
 		79763937277A3919006C6F55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79763936277A3919006C6F55 /* AppDelegate.swift */; };
-		7976393B277A3919006C6F55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976393A277A3919006C6F55 /* ViewController.swift */; };
 		7976393E277A3919006C6F55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7976393C277A3919006C6F55 /* Main.storyboard */; };
 		79763940277A391C006C6F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7976393F277A391C006C6F55 /* Assets.xcassets */; };
 		79763943277A391C006C6F55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79763941277A391C006C6F55 /* LaunchScreen.storyboard */; };
@@ -46,7 +45,6 @@
 		7965E85C27A09EB5008F9AE9 /* AlbumsViewControllerNavBarMenu+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlbumsViewControllerNavBarMenu+Ext.swift"; sourceTree = "<group>"; };
 		79763933277A3919006C6F55 /* IOS4_HW13_MIKHAIL_BAGMET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOS4_HW13_MIKHAIL_BAGMET.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79763936277A3919006C6F55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7976393A277A3919006C6F55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7976393D277A3919006C6F55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7976393F277A391C006C6F55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79763942277A391C006C6F55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -133,8 +131,6 @@
 			children = (
 				7976394C277A6379006C6F55 /* Resources */,
 				7976394A277A6353006C6F55 /* Sources */,
-				79763944277A391C006C6F55 /* Info.plist */,
-				7976393A277A3919006C6F55 /* ViewController.swift */,
 			);
 			path = IOS4_HW13_MIKHAIL_BAGMET;
 			sourceTree = "<group>";
@@ -162,6 +158,7 @@
 			children = (
 				7976394E277A63BE006C6F55 /* Storyboards */,
 				7976393F277A391C006C6F55 /* Assets.xcassets */,
+				79763944277A391C006C6F55 /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -348,7 +345,6 @@
 				7987CE00279817C700CA255F /* AlbumCollectionViewCell.swift in Sources */,
 				7987CE092798211C00CA255F /* AlbumsSectionHeader.swift in Sources */,
 				791C07B527A4493200D31F13 /* AlbumsViewControllerDataSource+Ext.swift in Sources */,
-				7976393B277A3919006C6F55 /* ViewController.swift in Sources */,
 				7955B349277BA37500000277 /* AlbumsSectionModel.swift in Sources */,
 				79763937277A3919006C6F55 /* AppDelegate.swift in Sources */,
 				7987CE022798181400CA255F /* PeopleCollectionViewCell.swift in Sources */,
@@ -500,7 +496,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XK82N983EZ;
-				INFOPLIST_FILE = IOS4_HW13_MIKHAIL_BAGMET/Info.plist;
+				INFOPLIST_FILE = IOS4_HW13_MIKHAIL_BAGMET/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -519,7 +515,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XK82N983EZ;
-				INFOPLIST_FILE = IOS4_HW13_MIKHAIL_BAGMET/Info.plist;
+				INFOPLIST_FILE = IOS4_HW13_MIKHAIL_BAGMET/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
