@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		791A52A5279B3DBC00BCCB14 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A52A4279B3DBC00BCCB14 /* UIViewExtension.swift */; };
+		791C07B127A43B9000D31F13 /* WhoPostBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C07B027A43B9000D31F13 /* WhoPostBadge.swift */; };
 		794CD465279B21B900DA135B /* PlacesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794CD464279B21B900DA135B /* PlacesCollectionViewCell.swift */; };
 		7955B340277B324900000277 /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B33F277B324900000277 /* AlbumsViewController.swift */; };
 		7955B349277BA37500000277 /* AlbumsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B348277BA37500000277 /* AlbumsSectionModel.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		791A52A4279B3DBC00BCCB14 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		791C07B027A43B9000D31F13 /* WhoPostBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoPostBadge.swift; sourceTree = "<group>"; };
 		794CD464279B21B900DA135B /* PlacesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCollectionViewCell.swift; sourceTree = "<group>"; };
 		7955B33F277B324900000277 /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		7955B348277BA37500000277 /* AlbumsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsSectionModel.swift; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		791C07AF27A43B5D00D31F13 /* CollectionViewBadges */ = {
+			isa = PBXGroup;
+			children = (
+				791C07B027A43B9000D31F13 /* WhoPostBadge.swift */,
+			);
+			path = CollectionViewBadges;
+			sourceTree = "<group>";
+		};
 		7955B347277BA35200000277 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,9 +162,10 @@
 		7976394D277A63A8006C6F55 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7955B33F277B324900000277 /* AlbumsViewController.swift */,
 				7987CE0527981FB300CA255F /* CollectionViewHeaders */,
 				7987CDFE2798176100CA255F /* CollectionViewCells */,
-				7955B33F277B324900000277 /* AlbumsViewController.swift */,
+				791C07AF27A43B5D00D31F13 /* CollectionViewBadges */,
 				7965E85B27A09E6D008F9AE9 /* Extensions */,
 			);
 			path = Controllers;
@@ -318,6 +329,7 @@
 			files = (
 				791A52A5279B3DBC00BCCB14 /* UIViewExtension.swift in Sources */,
 				7976395B277A7A31006C6F55 /* SearchViewController.swift in Sources */,
+				791C07B127A43B9000D31F13 /* WhoPostBadge.swift in Sources */,
 				79763959277A79C3006C6F55 /* ForYouViewController.swift in Sources */,
 				796480892790B6F800C36E36 /* BundleExtension.swift in Sources */,
 				7955B340277B324900000277 /* AlbumsViewController.swift in Sources */,

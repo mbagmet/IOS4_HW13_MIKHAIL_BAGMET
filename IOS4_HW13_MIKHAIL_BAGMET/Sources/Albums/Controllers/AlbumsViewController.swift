@@ -84,8 +84,9 @@ class AlbumsViewController: UIViewController {
 
     private func createAlbumsSection(direction: GroupDirection, itemHeight: CGFloat, itemsInColumn: CGFloat, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
+        let badge = createItemBadge()
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Metrics.itemWidth), heightDimension: .fractionalHeight(itemHeight))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize, supplementaryItems: [badge])
         item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 5, bottom: 20, trailing: 5)
 
         let itemsInRowCount = environment.container.effectiveContentSize.width / Metrics.estimatedItemWidth
@@ -131,6 +132,15 @@ class AlbumsViewController: UIViewController {
         sectionHeader.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 6, bottom: 0, trailing: 6)
 
         return sectionHeader
+    }
+
+    private func createItemBadge() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let badgeAnchor = NSCollectionLayoutAnchor(edges: [.bottom, .trailing], absoluteOffset: CGPoint(x: -6, y: -52))
+        let badgeSize = NSCollectionLayoutSize(widthDimension: .absolute(34), heightDimension: .absolute(34))
+        let badge = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: badgeSize,
+                                                                elementKind: WhoPostBadge.identifier,
+                                                                containerAnchor: badgeAnchor)
+        return badge
     }
 }
 
@@ -180,13 +190,12 @@ extension AlbumsViewController {
             }
         })
 
-        self.createHeaderSupplementary() //(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
+        self.createSupplementary() //(cellType: AlbumsSectionHeader.self, reuseIdentifier: AlbumsSectionHeader.identifier)
     }
 
-    private func createHeaderSupplementary() /*<T: AlbumsSectionHeader>(cellType: T.Type, reuseIdentifier: String)*/ {
+    private func createSupplementary() /*<T: AlbumsSectionHeader>(cellType: T.Type, reuseIdentifier: String)*/ {
 
-        let headerSuplementaryRegistration = UICollectionView.SupplementaryRegistration<AlbumsSectionHeader>(
-            elementKind: UICollectionView.elementKindSectionHeader) { sectionHeaderView, elementKind, indexPath in
+        let headerRegistration = UICollectionView.SupplementaryRegistration<AlbumsSectionHeader>(elementKind: UICollectionView.elementKindSectionHeader) { sectionHeaderView, elementKind, indexPath in
 
             guard let firstItem = self.dataSource?.itemIdentifier(for: indexPath) else { return }
             guard let section = self.dataSource?.snapshot().sectionIdentifier(containingItem: firstItem) else { return }
@@ -203,8 +212,34 @@ extension AlbumsViewController {
             }
         }
 
+        let whoPostBadgeRegistration = UICollectionView.SupplementaryRegistration<WhoPostBadge>(elementKind: WhoPostBadge.identifier) {
+            badgeView, elementKind, indexPath in
+
+            guard let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+
+            switch self.sections[indexPath.section].type  {
+            case .commonAlbums:
+                if item.whoPost != nil {
+                    badgeView.configureBadge(with: item)
+                }
+
+            default:
+                badgeView.isHidden = true
+            }
+        }
+
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-            return self?.collectionView.dequeueConfiguredReusableSupplementary(using: headerSuplementaryRegistration, for: indexPath)
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                return self?.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
+
+            case WhoPostBadge.identifier:
+                return self?.collectionView.dequeueConfiguredReusableSupplementary(using: whoPostBadgeRegistration, for: indexPath)
+
+            default:
+                fatalError("Unknown cell type!")
+            }
+
         }
     }
 
